@@ -46,4 +46,11 @@ public class PlanetCrudService {
         transaction.commit();
         session.close();
     }
+
+    public boolean existsById(String id) {
+        Session session = sessionFactory.openSession();
+        Planet planet = session.get(Planet.class, id);
+        session.close();
+        return planet != null;
+    }
 }

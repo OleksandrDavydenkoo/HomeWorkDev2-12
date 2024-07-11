@@ -47,4 +47,10 @@ public class ClientCrudService {
         session.close();
     }
 
+    public boolean existsById(Long id) {
+        Session session = sessionFactory.openSession();
+        Client client = session.get(Client.class, id);
+        session.close();
+        return client != null;
+    }
 }

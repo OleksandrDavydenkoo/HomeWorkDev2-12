@@ -1,9 +1,8 @@
 package org.example.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.sql.*;
+import lombok.Data;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "ticket")
@@ -13,12 +12,19 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "created_at")
     private Timestamp createdAt;
-    @Column(name = "client_id")
-    private Long clientId;
-    @Column(name = "from_planet_id")
-    private String fromPlanetId;
-    @Column(name = "to_planet_id")
-    private String toPlanetId;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "from_planet_id", nullable = false)
+    private Planet fromPlanet;
+
+    @ManyToOne
+    @JoinColumn(name = "to_planet_id", nullable = false)
+    private Planet toPlanet;
 }
